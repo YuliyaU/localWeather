@@ -29,12 +29,14 @@ function ajaxCall(latitude, longitude) {
     request.onreadystatechange = function () {
         console.log(request.readyState);
         if ((request.readyState === 4) && (request.status === 200)) {
-            console.log(request);      
+            console.log(request);     
+            console.log(request.response);   
             weatherInfo = JSON.parse(request.responseText);
             setTemp(weatherInfo);
             setLocation(weatherInfo);
             setWeatherCond(weatherInfo);
-            setWind(weatherInfo);                
+            setWind(weatherInfo);     
+            setAirplaneProperties(weatherInfo);           
             var convert = document.getElementsByClassName('convert')[0];
             convert.addEventListener('click', function(e) {
                 if (e.target && e.target.nodeName == 'BUTTON') {
@@ -67,7 +69,7 @@ function setWeatherCond(weatherInfo) {
 
 function setWind(weatherInfo) {
     var windBlock = document.getElementsByClassName('wind')[0];
-    windBlock.innerHTML = 'Wind ' + weatherInfo.wind.speed + ' m/s';
+    windBlock.innerHTML = 'Wind ' + weatherInfo.wind.speed + ' m/s';    
 }
 
 function updateTemp(k, item) {
@@ -86,6 +88,41 @@ function updateTemp(k, item) {
     var temperatureBlock = document.getElementsByClassName('temperature')[0];           
     temperatureBlock.innerHTML = temp.toFixed(1) + ' ' + measure;
 }
+
+function setAirplaneProperties(weatherInfo) {
+    setKeyframes();
+    var airplaneHeihtPercent = getAirplaneHeightPosition(weatherInfo);
+    var airplane = document.getElementsByClassName('airplane')[0];
+    getAirplaneFlight(weatherInfo, airplaneHeihtPercent, airplane);
+}
+
+function setKeyframes() {
+    var styleKeyframes = document.getElementsByTagName('style')[0];
+    console.log('window.innerWidth ' + Number(window.innerWidth));
+    var styleProperties = `@keyframes flight {
+    form {transform: translateX(0px);}
+    to {transform: translateX(` + (Number(window.innerWidth) + 600) + `px);}}`;
+    styleKeyframes.innerHTML = styleProperties;
+}
+
+function getAirplaneHeightPosition(weatherInfo) {     
+    var celsius = Math.floor(weatherInfo.main.temp - 273.15);
+    console.log('celsius ' + celsius);
+    var airplaneHeihtPercent = 50 - celsius;    
+    console.log('airplane height ' + airplaneHeihtPercent);
+
+    return airplaneHeihtPercent;
+}
+
+function getAirplaneFlight(weatherInfo, airplaneHeihtPercent, airplane) {
+    var animationTime = Number(window.innerWidth)/20/weatherInfo.wind.speed;    
+    console.log('animationTime ' + animationTime);
+    var airplaneAnimateAndSetHeight = `
+        top: ` + airplaneHeihtPercent + `%;
+        animation: flight ` + animationTime + `s linear backwards infinite;`;
+    airplane.style = airplaneAnimateAndSetHeight;
+}
+
 
 window.onload = function () {
     document.getElementsByClassName('get-weather')[0]

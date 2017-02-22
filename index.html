@@ -3,45 +3,53 @@
     <head>
         <title>Local Weather</title>
         <meta charset="utf-8">
-        <meta name="viewport" content="width:device-width">
+        <!--<meta name="viewport" content="width:device-width">-->
         <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
         <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
             integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
         <link href="https://fonts.googleapis.com/css?family=Oleo+Script|Open+Sans" rel="stylesheet">
         <link rel="stylesheet" href="style.css">
+        <style type="text/css">
+        
+        </style>
     </head>
     <body>
         <div class="container">
-            <h1>Local weather forecast</h1>
-            <!--<div class="latitude">
-                <h3>Latitude</h3>
-                <p></p>
-            </div>
-            <div class="longitude">
-                <h3>Longitude</h3>
-                <p></p>
-            </div>-->
-            <div class="temperature">                
-                0 C
-            </div>
-            <div class="other-info">            
-                <div class="location">                    
-                    Location
+            <div class="weather-container">
+                <h1>Local Weather<!-- forecast--></h1>
+                <!--<div class="latitude">
+                    <h3>Latitude</h3>
+                    <p></p>
                 </div>
-                <div class="weather-condition">                    
-                    Sky
+                <div class="longitude">
+                    <h3>Longitude</h3>
+                    <p></p>
+                </div>-->
+                <div class="temperature">                
+                    0 C
                 </div>
-                <div class="wind">                    
-                    Wind
+                <div class="other-info">            
+                    <div class="location">                    
+                        Location
+                    </div>
+                    <div class="weather-condition">                    
+                        Sky
+                    </div>
+                    <div class="wind">                    
+                        Wind
+                    </div>
+                </div>            
+                <button class="get-weather">Get weather forecast for my location</button>
+                <div class="convert">
+                    <button class="into-c">Turn into C</button>
+                    <button class="into-f">Turn into F</button>
+                    <button class="into-k">Turn into K</button>
                 </div>
-            </div>            
-            <button class="get-weather">Get weather forecast for my location</button>
-            <div class="convert">
-                <button class="into-c">Turn into C</button>
-                <button class="into-f">Turn into F</button>
-                <button class="into-k">Turn into K</button>
-            </div>
-        </div>        
+            </div>   
+            <div class="airplane">
+                <img src="airplane.png" alt="Airplane">
+            </div>     
+        </div>
         <script src="script.js"></script>
     </body>
 </html>
