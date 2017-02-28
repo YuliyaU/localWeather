@@ -1,20 +1,12 @@
 function getLocation() {    
-    var latitude;
-    // var latitudeBlock = document.getElementsByClassName('latitude')[0];    
-    var longitude;
-    // var longitudeBlock = document.getElementsByClassName('longitude')[0];    
-    // var location;
-    // var locationBlock = document.getElementsByClassName('location')[0].p[0];
+    var latitude;        
+    var longitude;    
     
     navigator.geolocation.getCurrentPosition(function (position) {
-        latitude = position.coords.latitude;
-        // latitudeBlock.innerHTML += latitude;
-        longitude = position.coords.longitude;
-        // longitudeBlock.innerHTML += longitude;        
-        ajaxCall(latitude, longitude);        
-        // console.log(location);
-    });   
-    
+        latitude = position.coords.latitude;        
+        longitude = position.coords.longitude;              
+        ajaxCall(latitude, longitude);       
+    });       
 }
 
 function ajaxCall(latitude, longitude) {
@@ -28,9 +20,7 @@ function ajaxCall(latitude, longitude) {
     var weatherInfo;
     request.onreadystatechange = function () {
         console.log(request.readyState);
-        if ((request.readyState === 4) && (request.status === 200)) {
-            console.log(request);     
-            console.log(request.response);   
+        if ((request.readyState === 4) && (request.status === 200)) {            
             weatherInfo = JSON.parse(request.responseText);
             setTemp(weatherInfo);
             setLocation(weatherInfo);
@@ -48,9 +38,6 @@ function ajaxCall(latitude, longitude) {
     }
     request.send();      
 }
-
-// combine the set functions into one to avoid adding the same parametor
-// like function setTheWeatherBlocks()
 
 function setTemp(weatherInfo) {
     var temperatureBlock = document.getElementsByClassName('temperature')[0];           
@@ -97,26 +84,20 @@ function setAirplaneProperties(weatherInfo) {
 }
 
 function setKeyframes() {
-    var styleKeyframes = document.getElementsByTagName('style')[0];
-    console.log('window.innerWidth ' + Number(window.innerWidth));
-    var styleProperties = `@keyframes flight {
-    form {transform: translateX(0px);}
-    to {transform: translateX(` + (Number(window.innerWidth) + 600) + `px);}}`;
-    styleKeyframes.innerHTML = styleProperties;
+    var styleSection = document.getElementsByTagName('style')[0];        
+    styleSection.innerHTML = `@keyframes flight {
+        form {transform: translateX(0px);}
+        to {transform: translateX(` + (Number(window.innerWidth) + 600) + `px);}}`;
 }
 
 function getAirplaneHeightPosition(weatherInfo) {     
-    var celsius = Math.floor(weatherInfo.main.temp - 273.15);
-    console.log('celsius ' + celsius);
-    var airplaneHeihtPercent = 50 - celsius;    
-    console.log('airplane height ' + airplaneHeihtPercent);
-
-    return airplaneHeihtPercent;
+    var celsius = Math.floor(weatherInfo.main.temp - 273.15);    
+    var airplaneHeihtPercents = 50 - celsius; 
+    return airplaneHeihtPercents;
 }
 
 function getAirplaneFlight(weatherInfo, airplaneHeihtPercent, airplane) {
-    var animationTime = Number(window.innerWidth)/20/weatherInfo.wind.speed;    
-    console.log('animationTime ' + animationTime);
+    var animationTime = Number(window.innerWidth)/weatherInfo.wind.speed/20;    
     var airplaneAnimateAndSetHeight = `
         top: ` + airplaneHeihtPercent + `%;
         animation: flight ` + animationTime + `s linear backwards infinite;`;
