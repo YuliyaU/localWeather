@@ -3,10 +3,10 @@ html {
 }
 
 body {
-    background: #aac9c2 url(background.jpg) 50% 0% no-repeat;    
+    background: #aac9c2 url(background.jpg) 50% 0% no-repeat fixed;    
     background-size: cover;   
     font-family: 'Open Sans', sans-serif; 
-    font-size: 2em;
+    font-size: 0.6em;
     color: rgba(255, 255, 255, 0.9);
 }
 
@@ -25,18 +25,19 @@ body {
 
 h1 {
     font-family: 'Oleo Script', cursive;
-    margin: 0.5em;
+    font-size: 4em;
+    margin: 0.2em;
 }
 
 .temperature {
     font-weight: bold;
-    font-size: 3em;
+    font-size: 7em;
     color: rgba(255, 255, 255, 0.6);
 }
 
 .other-info {
     box-sizing: border-box;
-    margin: 50px 0px 25px 0px;
+    margin: 0.2em 0px;
 }
 
 .location, .weather-condition, .wind {
@@ -47,23 +48,21 @@ h1 {
     /*background-color: rgba(255, 255, 255, 0.3);*/
     border-radius: 15px;
     color: #fff;
-    font-size: 0.5em;
+    font-size: 1.2em;
     font-style: italic;
 }
 
 button {
     border: none;
     box-sizing: border-box;
-    padding: 10px 20px;
+    padding: 10px;
     margin: 10px;
+    font-size: 1em;
     font-weight: bold;
     font-style: italic;
     cursor: pointer;
-    background-color: transparent;
-
-      
-    color: #fff;
-    font-size: 0.4em;
+    background-color: transparent;      
+    color: #fff;    
 }
 
 .get-weather {
@@ -71,7 +70,7 @@ button {
     margin: 10px auto;    
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 20px;  
-    font-size: 0.5em;  
+    font-size: 1.2em;  
     font-style: normal; 
 }
 
@@ -85,12 +84,18 @@ button:hover {
     color: #fff;
 }
 
+.made-by {
+    margin: 20px 0;
+    font-size: 1.2em;
+}
+
 .airplane {
     position: absolute; 
     left: -300px;       
+    width: 15%;
     z-index: 20;       
 }
 
 .airplane img {
-    width: 40%;
+    width: 100%;
 }
